@@ -31,11 +31,6 @@
     <%= form.text_field :status %>
   </div>
 
-  <div>
-    <%= form.label :department_id, style: "display: block" %>
-    <%= form.text_field :department_id %>
-  </div>
-
    <div>
     <%= form.label :department_id, "Department", style:"display:block" %>
     <%= form.collection_select :department_id, Department.all, :id, :name, prompt: "Select a department" %>

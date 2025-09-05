@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :classlists
+  resources :sections
+  resources :subjects
   resources :teachers
   resources :students
   resources :departments
@@ -16,5 +19,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :departments
   resources :students
+  resources :teachers
+  resources :subjects
+  resources :sections
 end
 
