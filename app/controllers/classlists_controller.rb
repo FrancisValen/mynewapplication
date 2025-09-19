@@ -22,6 +22,8 @@ class ClasslistsController < ApplicationController
   # POST /classlists or /classlists.json
   def create
     @classlist = Classlist.new(classlist_params)
+    @classlist.section.increment!(:number_of_students)
+    @classlist.section.increment!(:number_of_students, @classlist.section.subject.number_of_units)
 
     respond_to do |format|
       if @classlist.save
@@ -50,6 +52,8 @@ class ClasslistsController < ApplicationController
   # DELETE /classlists/1 or /classlists/1.json
   def destroy
     @classlist.destroy!
+    @classlist.section.decrement!(:number_of_students)
+    @classlist.section.decrement!(:number_of_students, @classlist.section.subject.number_of_units)
 
     respond_to do |format|
       format.html { redirect_to classlists_path, notice: "Classlist was successfully destroyed.", status: :see_other }
