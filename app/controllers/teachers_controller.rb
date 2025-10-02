@@ -22,9 +22,11 @@ class TeachersController < ApplicationController
   # POST /teachers or /teachers.json
   def create
     @teacher = Teacher.new(teacher_params)
+    @department = Department.find(@teacher.department_id)
 
     respond_to do |format|
       if @teacher.save
+        @department.increment!(:employee_count)
         format.html { redirect_to @teacher, notice: "Teacher was successfully created." }
         format.json { render :show, status: :created, location: @teacher }
       else
@@ -49,7 +51,12 @@ class TeachersController < ApplicationController
 
   # DELETE /teachers/1 or /teachers/1.json
   def destroy
+    @teacher = Teacher.find(params[:id])
+    @department = @teacher.department
+    
     @teacher.destroy!
+    @department.decrement!(:employee_count) if @department.present?
+    
 
     respond_to do |format|
       format.html { redirect_to teachers_path, notice: "Teacher was successfully destroyed.", status: :see_other }

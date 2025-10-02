@@ -22,9 +22,11 @@ class StudentsController < ApplicationController
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
+    @department = Department.find(@student.department_id)
 
     respond_to do |format|
       if @student.save
+        @department.increment!(:student_count)
         format.html { redirect_to @student, notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
       else
@@ -49,7 +51,11 @@ class StudentsController < ApplicationController
 
   # DELETE /students/1 or /students/1.json
   def destroy
+    @student = Student.find(params[:id])
+    @department = @student.department
+
     @student.destroy!
+    @department.decrement!(:student_count) if @department.present?
 
     respond_to do |format|
       format.html { redirect_to students_path, notice: "Student was successfully destroyed.", status: :see_other }
