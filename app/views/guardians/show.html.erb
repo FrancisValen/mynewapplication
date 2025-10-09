@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<h3>Guardian: <%= @guardian.name %> | Email Address : <%= @guardian.email_address %> | Contact Number: <%= @guardian.contact_number %> | Number Of Students: <%= @guradian.number_of_students %></h3>
+
+<h3>List of student</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Relationship</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @guardian.students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to "Edit this guardian", edit_guardian_path(@guardian) %> |
+  <%= link_to "Back to guardians", guardians_path %>
+
+  <%= button_to "Destroy this guardian", @guardian, method: :delete %>
+</div>
