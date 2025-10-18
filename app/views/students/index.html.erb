@@ -1,18 +1,21 @@
-<p style="color: green"><%= notice %></p>
+
 
 <% content_for :title, "Students" %>
 
 <h1>Student</h1>
 
-<table>
+<table class ="table table-light table-striped table-boarderless">
   <thead>
-    <tr>
+    <tr class = "table table-dark">
       <th>Name</th>
       <th>Year Level</th>
       <th>Program</th>
       <th>Department</th>
       <th>Number of Units</th>
       <th>Total Assessment</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
     </tr>
   </thead>
   <tbody>
@@ -24,10 +27,20 @@
         <td><%= student.department.name %></td>
         <td><%= student.number_of_units %></td>
         <td><%= student.total_assessment %></td>
-        <td><%= link_to " Show this student ", student %></td>
+        <td><%= link_to " Show this student ", student , class: "btn btn-outline-primary"%></td>
+        <td><%= link_to " Edit this student ", edit_student_path(student), class: "btn btn-outline-secondary" %></td>
+        <td><%= button_to "Destroy this student", student, method: :delete , class: "btn btn-outline-danger "%></td>
+
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "New student", new_student_path %>
+<p> </p>
+<p> </p>
+<p> </p>
+
+<%= link_to "New student", new_student_path, class: "btn btn-outline-success"%>
+
+
