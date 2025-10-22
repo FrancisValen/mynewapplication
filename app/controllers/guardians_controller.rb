@@ -8,6 +8,7 @@ class GuardiansController < ApplicationController
 
   # GET /guardians/1 or /guardians/1.json
   def show
+    @guardians = Guardian.find(params[:id])
   end
 
   # GET /guardians/new
