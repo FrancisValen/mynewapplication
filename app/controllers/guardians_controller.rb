@@ -1,12 +1,12 @@
 class GuardiansController < ApplicationController
-  before_action :set_guardian, only: %i[ show edit update destroy ]
+  before_action :set_guardian, only: %i[show edit update destroy]
 
-  # GET /guardians or /guardians.json
+  # GET /guardians
   def index
     @guardians = Guardian.all
   end
 
-  # GET /guardians/1 or /guardians/1.json
+  # GET /guardians/1
   def show
     @guardians = Guardian.find(params[:id])
   end
@@ -20,7 +20,7 @@ class GuardiansController < ApplicationController
   def edit
   end
 
-  # POST /guardians or /guardians.json
+  # POST /guardians
   def create
     @guardian = Guardian.new(guardian_params)
 
@@ -35,11 +35,11 @@ class GuardiansController < ApplicationController
     end
   end
 
-  # PATCH/PUT /guardians/1 or /guardians/1.json
+  # PATCH/PUT /guardians/1
   def update
     respond_to do |format|
       if @guardian.update(guardian_params)
-        format.html { redirect_to @guardian, notice: "Guardian was successfully updated.", status: :see_other }
+        format.html { redirect_to @guardian, notice: "Guardian was successfully updated." }
         format.json { render :show, status: :ok, location: @guardian }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,24 +48,22 @@ class GuardiansController < ApplicationController
     end
   end
 
-  # DELETE /guardians/1 or /guardians/1.json
+  # DELETE /guardians/1
   def destroy
-    @guardian.destroy!
-
+    @guardian.destroy
     respond_to do |format|
-      format.html { redirect_to guardians_path, notice: "Guardian was successfully destroyed.", status: :see_other }
+      format.html { redirect_to guardians_path, notice: "Guardian was successfully deleted." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_guardian
-      @guardian = Guardian.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def guardian_params
-      params.expect(guardian: [ :name, :email_address, :contact_number, :number_of_students ])
-    end
+  def set_guardian
+    @guardian = Guardian.find(params[:id])
+  end
+
+  def guardian_params
+    params.require(:guardian).permit(:name, :email_address, :contact_number, :number_of_student)
+  end
 end
