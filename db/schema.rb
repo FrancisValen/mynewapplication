@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_18_071030) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_02_064532) do
   create_table "classlists", force: :cascade do |t|
     t.integer "student_id", null: false
     t.integer "section_id", null: false
@@ -36,8 +36,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_071030) do
     t.integer "number_of_student"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "student_id", null: false
-    t.index ["student_id"], name: "index_guardians_on_student_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -49,6 +47,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_071030) do
     t.datetime "updated_at", null: false
     t.integer "number_of_students", default: 0
     t.index ["subject_id"], name: "index_sections_on_subject_id"
+  end
+
+  create_table "student_guardians", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "guardian_id", null: false
+    t.string "relationship"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guardian_id"], name: "index_student_guardians_on_guardian_id"
+    t.index ["student_id"], name: "index_student_guardians_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -87,8 +95,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_071030) do
 
   add_foreign_key "classlists", "sections"
   add_foreign_key "classlists", "students"
-  add_foreign_key "guardians", "students"
   add_foreign_key "sections", "subjects"
+  add_foreign_key "student_guardians", "guardians"
+  add_foreign_key "student_guardians", "students"
   add_foreign_key "students", "departments"
   add_foreign_key "subjects", "teachers"
   add_foreign_key "teachers", "departments"
