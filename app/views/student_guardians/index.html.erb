@@ -1,0 +1,124 @@
+<style>
+.page-title {
+  background-color: #ffce1b;
+  color: #000000;
+  padding: 12px 20px;
+  font-weight: bold;
+}
+
+.btn-gxyy {
+  background-color: none;
+  border-color: #ffce1b;
+  border-width: 2px;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-gxyy:hover {
+  background-color: black;
+  color: #ffce1b;
+  transform: scale(1.05);
+}
+
+.btn-des {
+  background-color: #ff4747;
+  color: white;
+  border: none;
+  padding: 6px 6px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-des:hover {
+  background-color: black;
+  color: #ff4747;
+  transform: scale(1.05);
+}
+
+.btn-gxgg {
+  background-color: #ffce1b;
+  color: black;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-gxgg:hover {
+  background-color: black;
+  color: #ffce1b;
+  transform: scale(1.05);
+}
+
+.table {
+  background-color: #000;
+  color: #ffce1b;
+  border: 1px solid #ffce1b;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: #1a1a1a;
+  color: #ffd700;
+  font-weight: bold;
+  border-bottom: 2px solid #ffce1b;
+}
+
+.table td {
+  border-color: #333;
+}
+
+.table tr:hover {
+  background-color: #111;
+  color: #ffd700;
+  transition: 0.2s;
+}
+</style>
+
+<h1 class="page-title text-center">STUDENT GUARDIANS</h1>
+
+<div class="text-center">
+  <table class="table table-light table-striped table-hover">
+    <thead>
+      <tr class="table table-dark">
+        <th style="color: #ffce1b;">Guardian Name</th>
+        <th style="color: #ffce1b;">Student Name</th>
+        <th style="color: #ffce1b;">Relationship</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @student_guardians.each do |sg| %>
+        <tr>
+          <td><%= sg.guardian.name %></td>
+          <td><%= sg.student.name %></td>
+          <td><%= sg.relationship %></td>
+
+          <!-- Buttons -->
+          <td><%= link_to " Show ", sg, class: "btn btn-gxyy" %></td>
+          <td><%= link_to " Edit ", edit_student_guardian_path(sg), class: "btn btn-gxyy" %></td>
+          <td><%= button_to "Destroy", sg, method: :delete, class: "btn btn-des" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br><br><br>
+
+<%= link_to "New Student Guardian", new_student_guardian_path, class: "btn btn-gxgg" %>
