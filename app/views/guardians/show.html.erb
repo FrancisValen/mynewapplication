@@ -1,28 +1,28 @@
+<h2>Guardian Details</h2>
 
+<table class="table table-dark table-striped">
+  <tr><th>Name:</th><td><%= @guardian.name %></td></tr>
+  <tr><th>Email:</th><td><%= @guardian.email_address %></td></tr>
+  <tr><th>Contact:</th><td><%= @guardian.contact_number %></td></tr>
+</table>
 
-<h3>Guardian: <%= @guardian.name %> | Email Address : <%= @guardian.email_address %> | Contact Number: <%= @guardian.contact_number %> | Number Of Students: <%= @guradian.number_of_students %></h3>
-
-<h3>List of student</h3>
-
-<table>
+<h3>Associated Students</h3>
+<table class="table table-bordered table-dark">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Student Name</th>
       <th>Relationship</th>
     </tr>
   </thead>
   <tbody>
-    <% @guardian.students.each do |student| %>
+    <% @guardian.student_guardians.each do |sg| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><%= sg.student.name %></td>
+        <td><%= sg.relationship %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<div>
-  <%= link_to "Edit this guardian", edit_guardian_path(@guardian) %> |
-  <%= link_to "Back to guardians", guardians_path %>
-
-  <%= button_to "Destroy this guardian", @guardian, method: :delete %>
-</div>
+<%= link_to "Edit", edit_guardian_path(@guardian), class: "btn btn-gxyy" %>
+<%= link_to "Back", guardians_path, class: "btn btn-gxyy" %>
