@@ -53,10 +53,10 @@ class TeachersController < ApplicationController
   def destroy
     @teacher = Teacher.find(params[:id])
     @department = @teacher.department
-    
+
     @teacher.destroy!
     @department.decrement!(:employee_count) if @department.present?
-    
+
 
     respond_to do |format|
       format.html { redirect_to teachers_path, notice: "Teacher was successfully destroyed.", status: :see_other }
