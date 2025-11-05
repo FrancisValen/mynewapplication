@@ -7,5 +7,5 @@ namespace :departments do
             student_count = department.students.count
             department.update(employee_count: employee_count, student_count: student_count)
         end
-    end   
+    end
 end

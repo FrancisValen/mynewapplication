@@ -37,6 +37,7 @@
 
   <div class="card-body" style="background-color: black; color: #ffce1b;">
     <%= form_with(model: classlist) do |form| %>
+<<<<<<< HEAD
 
       <% if classlist.errors.any? %>
         <div class="alert alert-danger">
@@ -49,6 +50,19 @@
         </div>
       <% end %>
 
+=======
+      <% if classlist.errors.any? %>
+        <div class="alert alert-danger">
+          <strong><%= pluralize(classlist.errors.count, "error") %> prevented this classlist from being saved:</strong>
+          <ul class="mb-0">
+            <% classlist.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+>>>>>>> origin/main
       <div class="mb-3">
         <%= form.label :student_id, "Student", class: "form-label fw-bold", style: "color: #ffce1b;" %>
         <%= form.collection_select :student_id, Student.all, :id, :name,
@@ -66,7 +80,10 @@
       <div class="action-buttons" style="display: flex; justify-content: flex-end; margin-top: 20px;">
         <%= form.submit(classlist.new_record? ? "Create Classlist" : "Update Classlist", class: "btn-round-gold") %>
       </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     <% end %>
   </div>
 </div>
