@@ -33,3 +33,4 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 helloworld_development*
+helloworld_development*
